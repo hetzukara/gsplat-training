@@ -181,7 +181,7 @@ class Parser:
         else:
             image_dir_suffix = ""
         colmap_image_dir = os.path.join(data_dir, "images")
-        image_dir = os.path.join(data_dir, "images" + image_dir_suffix)
+        image_dir = os.path.join(data_dir, "images")
         for d in [image_dir, colmap_image_dir]:
             if not os.path.exists(d):
                 raise ValueError(f"Image folder {d} does not exist.")
@@ -192,7 +192,7 @@ class Parser:
         image_files = sorted(_get_rel_paths(image_dir))
         if factor > 1 and os.path.splitext(image_files[0])[1].lower() == ".jpg":
             image_dir = _resize_image_folder(
-                colmap_image_dir, image_dir + "_png", factor=factor
+                colmap_image_dir, image_dir + image_dir_suffix + "_png", factor=factor
             )
             image_files = sorted(_get_rel_paths(image_dir))
         colmap_to_image = dict(zip(colmap_files, image_files))
